@@ -1,11 +1,11 @@
 import Sequelize from "sequelize";
 import env from "./cleanEnv.js";
 
-const host = env.MYSQL_HOSTBANCO;
-const user = env.MYSQL_USERBANCO;
-const password = env.MYSQL_SBANCO;
-const database = env.MYSQL_BANCO;
-const port = env.MYSQL_PORTBANCO;
+const host = env.MYSQL_HOST;
+const user = env.MYSQL_USER;
+const password = env.MYSQL_PASSWORD;
+const database = env.MYSQL_BANK;
+const port = env.MYSQL_PORT;
 
 export const connection = new Sequelize(database, user, password, {
   host,

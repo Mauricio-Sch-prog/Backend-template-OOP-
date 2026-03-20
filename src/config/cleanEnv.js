@@ -9,11 +9,11 @@ const env = cleanEnv(process.env, {
   IS_ADMIN: bool({ default: true }),
   alterTablesWhileSync: bool({ default: true }),
 
-  MYSQL_HOSTBANCO: str({ default: "localhost" }),
-  MYSQL_USERBANCO: str({ default: "root" }),
-  MYSQL_SBANCO: str({ default: "senai" }),
-  MYSQL_BANCO: str(),
-  MYSQL_PORTBANCO: num({ default: 3306 }),
+  MYSQL_HOST: str({ default: "localhost" }),
+  MYSQL_USER: str({ default: "root" }),
+  MYSQL_PASSWORD: str(),
+  MYSQL_BANK: str(),
+  MYSQL_PORT: num({ default: 3306 }),
 
 });
 
