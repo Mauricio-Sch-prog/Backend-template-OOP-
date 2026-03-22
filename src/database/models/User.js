@@ -56,11 +56,6 @@ export class User extends BaseModel {
             }
           }
         },
-        status: {
-          type: DataTypes.BOOLEAN,
-          allowNull: true,
-          defaultValue: true
-        },
         isVerified: {
           type: DataTypes.BOOLEAN,
           defaultValue: false,

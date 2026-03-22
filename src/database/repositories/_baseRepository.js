@@ -1,3 +1,4 @@
+import env from "../../config/cleanEnv.js";
 
 export class BaseRepository {
   constructor (model) {
@@ -5,11 +6,11 @@ export class BaseRepository {
   }
 
   async findAll (options = {}) {
-    return await this.model.findAll(options);
+    return await this.model.findAll(options,{ where: { status: true } });
   }
 
   async findById (id) {
-    return await this.model.findByPk(id);
+    return await this.model.findOne({ where:{ id, status: true } });
   }
 
   async create (data) {
@@ -17,14 +18,24 @@ export class BaseRepository {
   }
 
   async update (id, data) {
-    const record = await this.findById(id);
+    const record = await this.findOne({ where:{ id, status: true } });
     if (!record) throw new Error("Record not found");
     return await record.update(data);
   }
 
   async delete (id) {
-    const record = await this.findById(id);
+    const record = await this.findOne({ where:{ id, status: true } });
     if (!record) throw new Error("Record not found");
-    return await record.destroy();
+    return await record.update({ status: false });
+  }
+
+  async restore (id) {
+    if(env.IS_ADMIN) {
+      const record = await this.findOne({ where:{ id } });
+      if(!record) throw new Error("Id doesn't exist in this table");
+      return await record.update({ status: true });
+    }else{
+      throw new Error("Development only function");
+    }
   }
 }

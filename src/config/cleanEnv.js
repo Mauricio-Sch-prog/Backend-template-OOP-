@@ -15,6 +15,11 @@ const env = cleanEnv(process.env, {
   MYSQL_BANK: str(),
   MYSQL_PORT: num({ default: 3306 }),
 
+  MAILTRAP_SMTP_HOST: str(),
+  MAILTRAP_SMTP_PORT: num(),
+  MAILTRAP_SMTP_USER: str(),
+  MAILTRAP_SMTP_PASS: str(),
+
 });
 
 export default env;

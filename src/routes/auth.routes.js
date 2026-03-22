@@ -1,18 +1,14 @@
 import express from "express";
-import models from "../database/models/index.js";
-
+import AuthService from "../services/UserService.js";
 
 
 const router = express.Router();
 
-router.post("/user/createUser", async (req, res) => {
+router.post("/create", async (req, res) => {
   console.log("create user acessed");
-  
-  const { username, email, password } = req.body;
+
   try {
-    const newUser = await models.user.create({
-      username, email, password
-    });  
+    const newUser = await AuthService.registerUser(req.body); 
 
     return res.status(200).json(newUser);
   

@@ -9,6 +9,11 @@ export class BaseModel extends Model {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true
       },
+      status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: true
+      },
       ...specificFields
     };
   }
