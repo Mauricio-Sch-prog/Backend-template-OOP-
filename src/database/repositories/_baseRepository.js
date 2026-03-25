@@ -5,8 +5,12 @@ export class BaseRepository {
     this.model = model;
   }
 
+  async findOne (options = {}) {
+    return await this.model.findOne({ ...options, where: { ...options.where , status: true } });
+  }
+
   async findAll (options = {}) {
-    return await this.model.findAll(options,{ where: { status: true } });
+    return await this.model.findAll({ ...options, where: { ...options.where , status: true } });
   }
 
   async findById (id) {

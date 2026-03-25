@@ -1,23 +1,9 @@
 import express from "express";
-import AuthService from "../services/UserService.js";
+import { AuthController } from "../controllers/UserController.js";
 
 
 const router = express.Router();
 
-router.post("/create", async (req, res) => {
-  console.log("create user acessed");
-
-  try {
-    const newUser = await AuthService.registerUser(req.body); 
-
-    return res.status(200).json(newUser);
-  
-  } catch (err) {
-    console.error(err);
-    
-  }
-
-  return res.status(201).json( "não sobra nada");
-});
+router.post("/create", AuthController.register);
 
 export default router;

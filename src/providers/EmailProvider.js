@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import env from "../config/cleanEnv.js";
-import mailContent from "../Utils/mailContent.js";
+import mailContent from "./mailContent.js";
 
 
 class EmailProvider {
