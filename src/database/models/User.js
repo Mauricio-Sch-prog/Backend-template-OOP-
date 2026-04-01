@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { BaseModel } from "./_baseModel.js";
 import bcrypt from "bcrypt";
+import crypto from "crypto";
 
 
 
@@ -14,6 +15,20 @@ export class User extends BaseModel {
       return false;
     }
   }
+
+  generateTemporaryToken () {
+    const unHashedToken = crypto.randomBytes(20).toString("hex");
+    const hashedToken = crypto
+      .createHash("SHA256")
+      .update(unHashedToken)
+      .digest("hex");
+      
+    const tokenExpiry = new Date(Date.now() + (20+60+1000));
+
+    return{ unHashedToken, hashedToken, tokenExpiry };
+  }
+
+
 
   static initModel (sequelize) {
     const model = this.init(

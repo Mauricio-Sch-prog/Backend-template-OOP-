@@ -4,6 +4,11 @@ import { AuthController } from "../controllers/UserController.js";
 
 const router = express.Router();
 
-router.post("/create", AuthController.register);
+router.post("/register", AuthController.register);
+router.post("/login", AuthController.login);
+router.get("/verify-email/:verificationToken", AuthController.verify);
+
+router.post("/forgot-password", AuthController.forgotPassword);
+router.post("/change-password/:verificationToken", AuthController.changePassword);
 
 export default router;

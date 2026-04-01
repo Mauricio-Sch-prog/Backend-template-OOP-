@@ -28,6 +28,32 @@ class mailContent {
 
     return { emailTextual, emailHtml };
   }
+  
+  forgotPasswordMailgenContent (username, forgotPasswordUrl) {
+    const content = {
+      body: {
+        name: username,
+        intro: "I got a password reset request for your account",
+        action: {
+          instructions:
+          "Wanna reset your password? then click on the following button",
+          button: {
+            color: "#f8b117",
+            text: "Reset password",
+            link: forgotPasswordUrl, 
+          },
+        },
+      },
+      outro: "need help? reply to this email and I might possibly reply to you",
+    };
+
+    const emailTextual = this.mailGenerator.generatePlaintext(content);
+    const emailHtml = this.mailGenerator.generate(content);
+
+    return { emailTextual, emailHtml };
+  }
+
+  
 }
 
 export default new mailContent({
