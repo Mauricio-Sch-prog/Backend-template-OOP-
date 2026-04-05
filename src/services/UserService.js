@@ -44,7 +44,7 @@ class AuthService extends BaseService {
 
       const response = await existingUser.comparePassword(userData.password);
 
-      return;
+      return response;
 
     } catch (err) {
       this.handleError(err, "AuthService.register");
@@ -122,7 +122,7 @@ class AuthService extends BaseService {
 
       return existingUser;
     } catch (err) {
-      this.handleError(err, "AuthService.verifyEmail");
+      this.handleError(err, "AuthService.changePassword");
     }
     
 

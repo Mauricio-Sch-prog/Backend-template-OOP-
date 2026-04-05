@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import { BaseModel } from "./_baseModel.js";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import ApiError from "../../utils/ApiError.js";
 
 
 
@@ -63,7 +64,8 @@ export class User extends BaseModel {
               if(this.changed("password")) {
                 const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/;
                 if (!strongRegex.test(value)) {
-                  throw new Error(
+                  throw new ApiError(
+                    401,
                     "Password must contain at least one uppercase letter, one lowercase letter, and one number."
                   );
                 }

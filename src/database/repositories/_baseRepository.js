@@ -1,4 +1,5 @@
 import env from "../../config/cleanEnv.js";
+import ApiError from "../../utils/ApiError.js";
 
 export class BaseRepository {
   constructor (model) {
@@ -23,23 +24,23 @@ export class BaseRepository {
 
   async update (id, data) {
     const record = await this.findOne({ where:{ id, status: true } });
-    if (!record) throw new Error("Record not found");
+    if (!record) throw new ApiError(404, "Record not found");
     return await record.update(data);
   }
 
   async delete (id) {
     const record = await this.findOne({ where:{ id, status: true } });
-    if (!record) throw new Error("Record not found");
+    if (!record) throw new ApiError(404, "Record not found");
     return await record.update({ status: false });
   }
 
   async restore (id) {
     if(env.IS_ADMIN) {
       const record = await this.findOne({ where:{ id } });
-      if(!record) throw new Error("Id doesn't exist in this table");
+      if(!record) throw new ApiError(404, "Id doesn't exist in this table");
       return await record.update({ status: true });
     }else{
-      throw new Error("Development only function");
+      throw new ApiError(401, "Development only function");
     }
   }
 }

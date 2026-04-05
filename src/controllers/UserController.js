@@ -11,11 +11,13 @@ export class AuthController {
     return res.status(201).json(new ApiResponse(200, { data: newUser }, "Registered succesfully!"));
   });
 
-  static login = asyncHandler( async (req, res) => {
-    const loggedUser = await AuthService.loginUser(req.body); 
 
-    return res.status(201).json(new ApiResponse(200, { data: loggedUser }, "Registered succesfully!"));
+  static login = asyncHandler( async (req, res) => {
+    const success = await AuthService.loginUser(req.body); 
+
+    return res.status(201).json(new ApiResponse(200, { success }, `${success}`));
   });
+
 
   static verify = asyncHandler( async (req, res) => {
     const user = await AuthService.verifyEmail(req.params.verificationToken); 
@@ -23,12 +25,14 @@ export class AuthController {
     return res.status(201).json(new ApiResponse(200, { user }, "Email verified succesfully!"));
   });
 
+
   static forgotPassword = asyncHandler( async (req, res) => {
     const user = await AuthService.forgotPassword(req.body.email); 
 
     return res.status(201).json(new ApiResponse(200, {}, `A password reset email was sent to the email ${user.email}`));
   });
 
+  
   static changePassword = asyncHandler( async (req, res) => {
     const verificationToken = req.params.verificationToken;
     const newPassword = req.body.password;
