@@ -5,6 +5,8 @@ const env = cleanEnv(process.env, {
   PORT: port({ default: 3004 }),
   HOST: str("http://localhost:"),
 
+  FRONTEND_ORIGIN: str(),
+
   ONLINE: bool({ default: true }),
   IS_ADMIN: bool({ default: true }),
   alterTablesWhileSync: bool({ default: true }),
